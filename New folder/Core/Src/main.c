@@ -96,12 +96,12 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   UARTInterruptConfig();
-  sprintf((char*)UI,"\n-------------- Welcome to main menu -------------\r\n\n"
+  sprintf((char*)UI,"\r\n-------------- Welcome to main menu -------------\r\n\n"
 		  "**Please enter information to select a function.**\r\n"
 		  "Select 0 To LED Control\r\n"
 		  "Select 1 To Button Status\r\n"
 		  "================================================\r\n"
-		  "Enter you select this one : ");
+		  "Enter you select this one : \r\n");
   HAL_UART_Transmit_IT(&huart2, UI, strlen((char*)UI));
   /* USER CODE END 2 */
 
@@ -255,7 +255,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 					"Select d To On/OFF\r\n"
 					"Select x To Back to main menu\r\n"
 					"==================================================\r\n"
-					"Enter you select this one : \r\n\n",RxBuffer);
+					"Enter you select this one : ",RxBuffer);
 			HAL_UART_Transmit_IT(&huart2, TxBuffer, strlen((char*)TxBuffer));
 			CheckLedMenu=1;
 		}
@@ -289,8 +289,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 						  "Select 0 To LED Control\r\n"
 						  "Select 1 To Button Status\r\n"
 						  "================================================\r\n"
-						  "Enter you select this one : ");
+						  "Enter you select this one : \r\n");
 				  HAL_UART_Transmit_IT(&huart2, UI, strlen((char*)UI));
+				  CheckLedMenu=0;
 			}
 		}
 
@@ -298,6 +299,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 			sprintf((char*)TxBuffer,"%s\r\n---------- Welcome to Button Status ----------\r\n\n"
 								"**Please enter information to select a function.**\r\n"
 								"Select x To Back to main menu\r\n"
+								"Button Status is UNPRESS\r\n"
 								"================================================\r\n"
 								"Enter you select this one : \r\n\n",RxBuffer);
 						HAL_UART_Transmit_IT(&huart2, TxBuffer, strlen((char*)TxBuffer));
@@ -311,6 +313,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 										  "================================================\r\n"
 										  "Enter you select this one : ");
 								  HAL_UART_Transmit_IT(&huart2, UI, strlen((char*)UI));
+								  CheckLedMenu=0;
 							}
 
 		HAL_UART_Receive_IT(&huart2, RxBuffer, 1);
@@ -320,13 +323,22 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	if(GPIO_Pin == GPIO_PIN_13){
 		if(CheckLedMenu == 2)press = press+1;
 		if(CheckLedMenu == 2 && press == 1){
-			sprintf ((char*)UI,"Button Status is PRESS\r\n",RxBuffer);
-			HAL_UART_Transmit_IT(&huart2, UI, strlen((char*)UI));
-
+			sprintf((char*)TxBuffer,"%s\r\n---------- Welcome to Button Status ----------\r\n\n"
+								"**Please enter information to select a function.**\r\n"
+								"Select x To Back to main menu\r\n"
+								"Button Status is PRESS\r\n"
+								"================================================\r\n"
+								"Enter you select this one : \r\n\n",RxBuffer);
+						HAL_UART_Transmit_IT(&huart2, TxBuffer, strlen((char*)TxBuffer));
 				}
 		else if(CheckLedMenu == 2 && press == 2){
-			sprintf ((char*)UI,"Button Status is UNPRESS\r\n",RxBuffer);
-						HAL_UART_Transmit_IT(&huart2, UI, strlen((char*)UI));
+			sprintf((char*)TxBuffer,"%s\r\n---------- Welcome to Button Status ----------\r\n\n"
+								"**Please enter information to select a function.**\r\n"
+								"Select x To Back to main menu\r\n"
+								"Button Status is UNPRESS\r\n"
+								"================================================\r\n"
+								"Enter you select this one : \r\n\n",RxBuffer);
+						HAL_UART_Transmit_IT(&huart2, TxBuffer, strlen((char*)TxBuffer));
 			press=0;
 		}
 	}
