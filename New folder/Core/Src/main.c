@@ -254,7 +254,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 			sprintf((char*)TxBuffer,"%s\r\n----------- Welcome to LED Control -----------\r\n\n" //mode led
 					"**Please enter information to select a function.**\r\n"
 					"Select a To Speed Up +1Hz\r\n"
-					"Select b To Speed Down -1Hz\r\n"
+					"Select s To Speed Down -1Hz\r\n"
 					"Select d To On/OFF\r\n"
 					"Select x To Back to main menu\r\n"
 					"==================================================\r\n"
@@ -292,7 +292,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 						,RxBuffer,Hz);
 				HAL_UART_Transmit_IT(&huart2, TxBuffer, strlen((char*)TxBuffer));
 			}
-			else if(RxBuffer[0] == 'b'){
+			else if(RxBuffer[0] == 's'){
 				Hz=Hz-1;
 				sprintf((char*)TxBuffer,"%s\r\nLED Current is %d\r\n"
 						"Enter you select this one : "
@@ -326,7 +326,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 			else{
 				sprintf((char*)UI,"%s\r\n**Please select to choice**\r\n" //check choice to select incorrect
 						"Select a To Speed Up +1Hz\r\n"
-						"Select b To Speed Down -1Hz\r\n"
+						"Select s To Speed Down -1Hz\r\n"
 						"Select d To On/OFF\r\n"
 						"Select x To Back to main menu\r\n"
 						"==================================================\r\n"

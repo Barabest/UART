@@ -916,7 +916,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
  8000896:	498d      	ldr	r1, [pc, #564]	; (8000acc <HAL_UART_RxCpltCallback+0x268>)
  8000898:	488d      	ldr	r0, [pc, #564]	; (8000ad0 <HAL_UART_RxCpltCallback+0x26c>)
  800089a:	f002 fb23 	bl	8002ee4 <siprintf>
-					"Select b To Speed Down -1Hz\r\n"
+					"Select s To Speed Down -1Hz\r\n"
 					"Select d To On/OFF\r\n"
 					"Select x To Back to main menu\r\n"
 					"==================================================\r\n"
@@ -1037,10 +1037,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
  8000958:	f001 fb23 	bl	8001fa2 <HAL_UART_Transmit_IT>
  800095c:	e073      	b.n	8000a46 <HAL_UART_RxCpltCallback+0x1e2>
 			}
-			else if(RxBuffer[0] == 'b'){
+			else if(RxBuffer[0] == 's'){
  800095e:	4b5a      	ldr	r3, [pc, #360]	; (8000ac8 <HAL_UART_RxCpltCallback+0x264>)
  8000960:	781b      	ldrb	r3, [r3, #0]
- 8000962:	2b62      	cmp	r3, #98	; 0x62
+ 8000962:	2b73      	cmp	r3, #115	; 0x73
  8000964:	d117      	bne.n	8000996 <HAL_UART_RxCpltCallback+0x132>
 				Hz=Hz-1;
  8000966:	4b5e      	ldr	r3, [pc, #376]	; (8000ae0 <HAL_UART_RxCpltCallback+0x27c>)
@@ -1163,7 +1163,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
  8000a2a:	4933      	ldr	r1, [pc, #204]	; (8000af8 <HAL_UART_RxCpltCallback+0x294>)
  8000a2c:	482b      	ldr	r0, [pc, #172]	; (8000adc <HAL_UART_RxCpltCallback+0x278>)
  8000a2e:	f002 fa59 	bl	8002ee4 <siprintf>
-						"Select b To Speed Down -1Hz\r\n"
+						"Select s To Speed Down -1Hz\r\n"
 						"Select d To On/OFF\r\n"
 						"Select x To Back to main menu\r\n"
 						"==================================================\r\n"
